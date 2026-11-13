@@ -1,0 +1,30 @@
+# vLLM v0.33.0 on a GPU host (NOT part of the CPU demo). Pinned by tag + digest.
+# Equivalent to: inferencelab backend launch-plan configs/deployments/vllm_qwen_7b_bf16.yaml
+# Usage on the GPU host:  docker compose -f vllm.compose.yaml up -d
+# Secrets (HF_TOKEN for gated models) come from ~/.inferencelab/env, never from this file.
+services:
+  vllm:
+    image: vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e
+    command:
+      - Qwen/Qwen2.5-7B-Instruct
+      - --revision=a09a35458c702b33eeacc393d103063234e8bc28
+      - --served-model-name=qwen2.5-7b-instruct
+      - --host=0.0.0.0
+      - --port=8000
+      - --generation-config=vllm
+      - --enable-prompt-tokens-details
+      - --dtype=bfloat16
+      - --max-model-len=8192
+      - --max-num-seqs=256
+      - --max-num-batched-tokens=8192
+      - --gpu-memory-utilization=0.90
+      - --enable-prefix-caching
+      - --enable-chunked-prefill
+    ports: ["127.0.0.1:8000:8000"]
+    ipc: host
+    env_file: [~/.inferencelab/env]
+    volumes: ["~/.cache/huggingface:/root/.cache/huggingface"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: all, capabilities: [gpu]}]

@@ -1,0 +1,22 @@
+# Prometheus scrape configuration for the local Compose stack.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: inferencelab-gateway
+    static_configs:
+      - targets: ["gateway:8080"]
+
+  - job_name: simulated-engines
+    static_configs:
+      - targets: ["mock-backend-a:9001", "mock-backend-b:9002"]
+
+# Real engines on a GPU host (e.g. reached through an SSH tunnel: ssh -L 8000:127.0.0.1:8000 gpu):
+#  - job_name: vllm
+#    static_configs: [{targets: ["host.docker.internal:8000"]}]        # /metrics
+#  - job_name: sglang                                                  # needs --enable-metrics
+#    static_configs: [{targets: ["host.docker.internal:30000"]}]
+#  - job_name: tensorrt-llm                                            # needs return_perf_metrics: true
+#    metrics_path: /prometheus/metrics
+#    static_configs: [{targets: ["host.docker.internal:8001"]}]

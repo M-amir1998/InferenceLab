@@ -1,0 +1,74 @@
+# CPU-only demonstration stack: two simulated engines, the gateway, Prometheus and Grafana.
+#   docker compose up --build -d                      # stack
+#   docker compose --profile load up loadgen          # optional: drive traffic for the dashboards
+#   open http://127.0.0.1:3000  (Grafana, "InferenceLab" dashboard) · http://127.0.0.1:9090
+# Every port is bound to 127.0.0.1. No GPU, no credentials, no internet needed after build.
+name: inferencelab
+
+x-inferencelab: &inferencelab
+  image: inferencelab:local
+  build: .
+  restart: unless-stopped
+  read_only: true
+  tmpfs: [/tmp]
+  security_opt: ["no-new-privileges:true"]
+
+services:
+  mock-backend-a:
+    <<: *inferencelab
+    command: ["backend", "serve", "/app/configs/backends/sim_a.yaml", "--host", "0.0.0.0", "--port", "9001", "--admin"]
+    expose: ["9001"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9001/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  mock-backend-b:
+    <<: *inferencelab
+    command: ["backend", "serve", "/app/configs/backends/sim_b.yaml", "--host", "0.0.0.0", "--port", "9002", "--admin"]
+    expose: ["9002"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9002/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  gateway:
+    <<: *inferencelab
+    command: ["gateway", "serve", "/app/configs/gateway/compose.yaml"]
+    ports: ["127.0.0.1:8080:8080"]
+    depends_on:
+      mock-backend-a: {condition: service_healthy}
+      mock-backend-b: {condition: service_healthy}
+
+  loadgen:
+    <<: *inferencelab
+    profiles: ["load"]
+    restart: "no"
+    healthcheck: {disable: true}  # one-shot client: the image's HTTP healthcheck does not apply
+    command: ["benchmark", "run", "/app/configs/benchmarks/compose_load.yaml", "--no-plots"]
+    depends_on:
+      gateway: {condition: service_healthy}
+
+  prometheus:
+    image: prom/prometheus:v3.15.1
+    restart: unless-stopped
+    volumes:
+      - ./deployment/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ["127.0.0.1:9090:9090"]
+    depends_on: [gateway]
+
+  grafana:
+    image: grafana/grafana:12.4.13
+    restart: unless-stopped
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+    volumes:
+      - ./deployment/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deployment/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on: [prometheus]

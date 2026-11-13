@@ -1,0 +1,29 @@
+# SGLang v0.5.23 on a GPU host (NOT part of the CPU demo). Pinned by tag + digest.
+# Equivalent to: inferencelab backend launch-plan configs/deployments/sglang_qwen_7b_bf16.yaml
+services:
+  sglang:
+    image: lmsysorg/sglang:v0.5.23@sha256:f832b5c39559c9caa900b22ad37c76fcce66470676855c42052102c537812f1f
+    command:
+      - sglang
+      - serve
+      - --model-path=Qwen/Qwen2.5-7B-Instruct
+      - --revision=a09a35458c702b33eeacc393d103063234e8bc28
+      - --host=0.0.0.0
+      - --port=30000
+      - --served-model-name=qwen2.5-7b-instruct
+      - --enable-metrics
+      - --enable-cache-report
+      - --sampling-defaults=openai
+      - --dtype=bfloat16
+      - --context-length=8192
+      - --max-running-requests=256
+      - --mem-fraction-static=0.85
+      - --chunked-prefill-size=8192
+    ports: ["127.0.0.1:30000:30000"]
+    ipc: host
+    env_file: [~/.inferencelab/env]
+    volumes: ["~/.cache/huggingface:/root/.cache/huggingface"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: all, capabilities: [gpu]}]
