@@ -1,0 +1,10 @@
+# LOCAL prefix-caching A/B on the simulated engine (cache on vs off), virtual time.
+name: local-prefix-cache
+mode: local
+max_runs: 8
+virtual_time: true
+matrix:
+  backends: [../backends/sim_a.yaml, ../backends/sim_a_nocache.yaml]
+  workloads: [../workloads/local_shared_prefix.yaml, ../workloads/local_chat.yaml]
+  concurrency: [8]
+slo: ../slos/local_demo.yaml

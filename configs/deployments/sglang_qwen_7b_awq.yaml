@@ -1,0 +1,18 @@
+# SGLang v0.5.23 serving the official AWQ checkpoint (auto-detected, upgraded to awq_marlin).
+name: sglang-qwen7b-awq
+model: qwen2.5-7b-instruct-awq
+backend: sglang
+image: lmsysorg/sglang:v0.5.23@sha256:f832b5c39559c9caa900b22ad37c76fcce66470676855c42052102c537812f1f
+quantization: awq
+dtype: auto
+gpu_memory_utilization: 0.85
+served_model_name: qwen2.5-7b-instruct-awq
+port: 30000
+hardware:
+  gpu: H100-80GB-SXM   # the GPU you actually rent; prices are supplied by the experiment config
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: true
+chunked_prefill: true

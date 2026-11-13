@@ -1,0 +1,7 @@
+# HTTP adapter for a vLLM server (e.g. through an SSH tunnel to the GPU host).
+type: vllm
+name: vllm
+base_url: http://127.0.0.1:8000
+models: [qwen2.5-7b-instruct]
+metrics_path: /metrics
+# api_key_env: VLLM_API_KEY   # name of an env var, never the key itself

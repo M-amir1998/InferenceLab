@@ -1,0 +1,9 @@
+# Trace-driven workload: replays request *shapes* and timestamps from a JSONL trace.
+# Traces contain token counts and ids only; files with prompt text are rejected.
+name: trace_replay
+model: qwen2.5-7b-instruct
+trace: {path: traces/example-lengths.jsonl, time_scale: 1.0}
+arrival: {kind: trace}
+temperature: 0.0
+ignore_eos: true
+seed: 19

@@ -1,0 +1,14 @@
+# Specification only. Prices are never stored here: supply them per experiment
+# (hourly_cost_usd + price_source + price_recorded_at) because they change constantly.
+name: A10G
+vendor: nvidia
+architecture: Ampere
+compute_capability: "8.6"
+vram_gb: 24
+memory_type: GDDR6
+memory_bandwidth_gbps: 600
+fp8_tensor_cores: false
+form_factor: PCIe (AWS G5 instances)
+interconnect: PCIe Gen4
+source: "https://aws.amazon.com/ec2/instance-types/g5/"
+notes: AWS variant of the A10; bandwidth taken from the A10 datasheet.

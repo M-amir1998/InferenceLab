@@ -1,0 +1,17 @@
+# Step-load test: find where latency breaks as offered load rises.
+name: step_load
+model: qwen2.5-7b-instruct
+input_tokens: {kind: uniform, min: 128, max: 512}
+output_tokens: {kind: uniform, min: 64, max: 256}
+arrival:
+  kind: step
+  poisson: true
+  stages:
+    - {rate: 1.0, duration_s: 60}
+    - {rate: 2.0, duration_s: 60}
+    - {rate: 4.0, duration_s: 60}
+    - {rate: 8.0, duration_s: 60}
+duration_s: 240
+temperature: 0.0
+ignore_eos: true
+seed: 18

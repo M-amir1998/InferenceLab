@@ -1,0 +1,12 @@
+# Long input / short output: RAG / summarisation-style (prefill-bound) traffic.
+name: long_short
+description: 3000-4000 input tokens, 64-128 output tokens
+model: qwen2.5-7b-instruct
+num_requests: 256
+input_tokens: {kind: uniform, min: 3000, max: 4000}
+output_tokens: {kind: uniform, min: 64, max: 128}
+arrival: {kind: closed_loop, concurrency: 8}
+warmup: {requests: 8}
+temperature: 0.0
+ignore_eos: true
+seed: 13

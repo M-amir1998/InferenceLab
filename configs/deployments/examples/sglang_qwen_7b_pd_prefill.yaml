@@ -1,0 +1,17 @@
+# Prefill/decode disaggregation EXAMPLE (prefill worker). Requires a matching decode
+# worker, an RDMA-capable transfer backend and the SGLang router in front:
+#   python -m sglang_router.launch_router --pd-disaggregation --prefill http://P:30000 8998 --decode http://D:30001
+name: sglang-qwen7b-prefill
+model: qwen2.5-7b-instruct
+backend: sglang
+role: prefill
+image: lmsysorg/sglang:v0.5.23@sha256:f832b5c39559c9caa900b22ad37c76fcce66470676855c42052102c537812f1f
+quantization: bf16
+dtype: bfloat16
+served_model_name: qwen2.5-7b-instruct
+port: 30000
+hardware:
+  gpu: H100-80GB-SXM
+  count: 1
+engine_args:
+  disaggregation-transfer-backend: mooncake

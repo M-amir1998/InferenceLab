@@ -1,0 +1,10 @@
+# Local shared-prefix workload for simulated prefix-cache A/B runs.
+name: local_shared_prefix
+model: demo-model
+num_requests: 240
+input_tokens: {kind: uniform, min: 1056, max: 1152}
+output_tokens: {kind: fixed, value: 32}
+shared_prefix: {num_prefixes: 4, prefix_tokens: 1024}
+arrival: {kind: closed_loop, concurrency: 8}
+warmup: {requests: 8}
+seed: 4

@@ -1,0 +1,15 @@
+# Autoscaling policy comparison on a diurnal trace using the SIMULATED sim-a profile.
+# Fluid-queue model: compares policies; it does not validate Kubernetes behaviour.
+name: diurnal_request_rate
+duration_s: 7200
+tick_s: 5
+trace: {kind: diurnal, base_rps: 5, peak_rps: 90, period_s: 7200}
+replica:
+  profile: ../profiles/sim_a--local_sweep.json
+  latency_metric: ttft
+  latency_percentile: 95
+  startup_delay_s: 180
+  pricing: {hourly_cost_usd: 1.0, price_source: example-placeholder}   # EXAMPLE price
+policy: {kind: request_rate, target_rps_per_replica: 10, min_replicas: 1, max_replicas: 20}
+initial_replicas: 1
+latency_slo_ms: 400

@@ -1,0 +1,13 @@
+# Gateway configuration used by docker-compose.yml (service names resolve on the compose network).
+server: {host: 0.0.0.0, port: 8080}
+backends:
+  - {type: openai, name: sim-a, base_url: "http://mock-backend-a:9001", models: [demo-model], deployment: sim-a}
+  - {type: openai, name: sim-b, base_url: "http://mock-backend-b:9002", models: [demo-model], deployment: sim-b}
+routing:
+  policy: least_outstanding
+  affinity: {enabled: true, keys: [conversation_id]}
+queue: {max_concurrency: 64, max_pending_requests: 256}
+security:
+  allowed_backend_hosts: [mock-backend-a, mock-backend-b]
+observability: {log_level: info, log_json: true}
+slo: {name: compose, ttft_p95_ms: 400, tpot_p95_ms: 50}

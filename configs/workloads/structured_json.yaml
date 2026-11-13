@@ -1,0 +1,23 @@
+# Constrained JSON generation (structured output). Run with capture_text: true in the
+# benchmark config to compute the valid-JSON rate; engines must support json_schema.
+name: structured_json
+model: qwen2.5-7b-instruct
+num_requests: 256
+input_tokens: {kind: uniform, min: 64, max: 128}
+output_tokens: {kind: fixed, value: 256}
+arrival: {kind: closed_loop, concurrency: 8}
+temperature: 0.0
+ignore_eos: false     # let the grammar end the object
+extra_body:
+  response_format:
+    type: json_schema
+    json_schema:
+      name: record
+      schema:
+        type: object
+        properties:
+          title: {type: string}
+          tags: {type: array, items: {type: string}}
+          score: {type: number}
+        required: [title, tags, score]
+seed: 20

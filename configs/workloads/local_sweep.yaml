@@ -1,0 +1,9 @@
+# Local load-sweep workload (concurrency is set by the experiment matrix).
+name: local_sweep
+model: demo-model
+num_requests: 240
+input_tokens: {kind: uniform, min: 128, max: 512}
+output_tokens: {kind: fixed, value: 64}
+arrival: {kind: closed_loop, concurrency: 1}
+warmup: {requests: 8}
+seed: 5

@@ -1,0 +1,13 @@
+# sim-a with prefix caching disabled (local cache A/B).
+type: simulated
+name: sim-a-nocache
+models: [demo-model]
+engine:
+  step_overhead_s: 0.012
+  prefill_s_per_token: 0.00003
+  decode_s_per_seq: 0.0003
+  max_num_seqs: 32
+  max_num_batched_tokens: 2048
+  num_kv_blocks: 4096
+  prefix_caching: false
+  chunked_prefill: true

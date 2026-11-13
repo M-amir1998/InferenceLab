@@ -1,0 +1,7 @@
+# Deterministic mock: fixed TTFT/TPOT with jitter.
+type: mock
+name: mock-fast
+models: [demo-model]
+latency: {ttft_ms: 50, tpot_ms: 10, jitter: 0.1}
+failure_probability: 0.0
+seed: 1

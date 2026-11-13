@@ -1,0 +1,6 @@
+# HTTP adapter for trtllm-serve. Prometheus metrics need return_perf_metrics: true.
+type: tensorrt_llm
+name: trtllm
+base_url: http://127.0.0.1:8000
+models: [qwen2.5-7b-instruct]
+metrics_path: /prometheus/metrics

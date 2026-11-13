@@ -1,0 +1,4 @@
+# Offline/batch SLO: only completion time matters.
+name: batch
+e2e_p95_ms: 60000
+availability: 0.999

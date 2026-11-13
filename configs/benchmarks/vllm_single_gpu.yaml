@@ -1,0 +1,14 @@
+# Single GPU benchmark against a vLLM server on the GPU host (load generated on the host).
+# Needs --execute: inferencelab benchmark run configs/benchmarks/vllm_single_gpu.yaml --execute
+name: vllm-qwen7b-bf16-short-short
+execution: gpu
+target:
+  type: http
+  base_url: http://127.0.0.1:8000
+  metrics_url: http://127.0.0.1:8000/metrics
+  engine: vllm
+workload: ../workloads/short_short.yaml
+slo: ../slos/interactive.yaml
+deployment: ../deployments/vllm_qwen_7b_bf16.yaml
+model: ../models/qwen2.5-7b-instruct.yaml
+simulated: false

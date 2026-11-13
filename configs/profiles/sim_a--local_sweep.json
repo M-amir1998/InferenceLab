@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "profile_id": "sim_a--local_sweep",
+  "created_at": "2026-11-13T20:27:39.718385Z",
+  "simulated": true,
+  "hardware": {
+    "gpu": "cpu",
+    "count": 0
+  },
+  "model": {
+    "name": "demo-model",
+    "checkpoint": null,
+    "revision": null
+  },
+  "backend": {
+    "kind": "backend",
+    "version": null,
+    "image": null
+  },
+  "deployment": {
+    "name": "sim_a",
+    "quantization": null,
+    "tensor_parallel": null,
+    "prefix_caching": null,
+    "chunked_prefill": null
+  },
+  "workload": {
+    "name": "local_sweep",
+    "arrival": "closed_loop",
+    "mean_input_tokens": 314.5991379310345,
+    "mean_output_tokens": 64.0
+  },
+  "slo": {
+    "name": "local_demo",
+    "objectives": [
+      {
+        "metric": "ttft",
+        "percentile": 95.0,
+        "threshold_ms": 400.0
+      },
+      {
+        "metric": "tpot",
+        "percentile": 95.0,
+        "threshold_ms": 50.0
+      },
+      {
+        "metric": "e2e",
+        "percentile": 95.0,
+        "threshold_ms": 3000.0
+      }
+    ],
+    "availability": null,
+    "request_thresholds": null
+  },
+  "points": [
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 1.0
+      },
+      "run_id": "20261113-202739-sim-a-local-sweep-c1-77e6",
+      "requests": 232,
+      "request_throughput": 1.2523242375388401,
+      "input_token_throughput": 393.98012553985916,
+      "output_token_throughput": 80.14875120248577,
+      "goodput_rps": 1.2523242375388401,
+      "slo_attainment": 1.0,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 21.360000000003154,
+        "p90": 26.130000000001985,
+        "p95": 26.56349999999037,
+        "p99": null,
+        "mean": 21.437974137930897
+      },
+      "tpot_ms": {
+        "p50": 12.334299999999864,
+        "p90": 12.350199999999974,
+        "p95": 12.351644999999836,
+        "p99": null,
+        "mean": 12.334559913793086
+      },
+      "itl_ms": {
+        "p50": 12.334199999997963,
+        "p90": 12.350100000006137,
+        "p95": 12.352100000001087,
+        "p99": 12.35470000000305,
+        "mean": 12.334559913793088
+      },
+      "e2e_ms": {
+        "p50": 798.4208999999946,
+        "p90": 804.1926000000003,
+        "p95": 804.71713499998,
+        "p99": null,
+        "mean": 798.5152487068952
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 2.0
+      },
+      "run_id": "20261113-202739-sim-a-local-sweep-c2-8f72",
+      "requests": 232,
+      "request_throughput": 2.4124564853031485,
+      "input_token_throughput": 758.956730572504,
+      "output_token_throughput": 154.3972150594015,
+      "goodput_rps": 2.4124564853031485,
+      "slo_attainment": 1.0,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 30.825000000000102,
+        "p90": 37.314000000001,
+        "p95": 38.633999999997215,
+        "p99": null,
+        "mean": 30.87594827586235
+      },
+      "tpot_ms": {
+        "p50": 12.668949999999926,
+        "p90": 12.690579999999906,
+        "p95": 12.69497999999999,
+        "p99": null,
+        "mean": 12.6691198275862
+      },
+      "itl_ms": {
+        "p50": 12.669000000002484,
+        "p90": 12.691000000002006,
+        "p95": 12.696999999999292,
+        "p99": 12.70560000000387,
+        "mean": 12.6691198275862
+      },
+      "e2e_ms": {
+        "p50": 828.9688499999954,
+        "p90": 836.8205399999952,
+        "p95": 838.4177399999967,
+        "p99": null,
+        "mean": 829.030497413793
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 4.0
+      },
+      "run_id": "20261113-202740-sim-a-local-sweep-c4-8528",
+      "requests": 232,
+      "request_throughput": 4.494074027785967,
+      "input_token_throughput": 1413.831814939717,
+      "output_token_throughput": 287.6207377783019,
+      "goodput_rps": 4.494074027785967,
+      "slo_attainment": 1.0,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 49.09500000000122,
+        "p90": 59.891999999999975,
+        "p95": 61.12799999999878,
+        "p99": null,
+        "mean": 49.751896551723895
+      },
+      "tpot_ms": {
+        "p50": 13.336049999999997,
+        "p90": 13.372039999999984,
+        "p95": 13.376159999999926,
+        "p99": null,
+        "mean": 13.338239655172435
+      },
+      "itl_ms": {
+        "p50": 13.336999999999932,
+        "p90": 13.369500000003143,
+        "p95": 13.378899999999305,
+        "p99": 13.389300000000048,
+        "mean": 13.338239655172435
+      },
+      "e2e_ms": {
+        "p50": 889.266150000001,
+        "p90": 902.3305199999988,
+        "p95": 903.8260799999941,
+        "p99": null,
+        "mean": 890.0609948275873
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 8.0
+      },
+      "run_id": "20261113-202740-sim-a-local-sweep-c8-70dd",
+      "requests": 232,
+      "request_throughput": 7.808233579699601,
+      "input_token_throughput": 2456.4635529376496,
+      "output_token_throughput": 499.72694910077445,
+      "goodput_rps": 7.808233579699601,
+      "slo_attainment": 1.0,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 75.99429999999785,
+        "p90": 107.53006999999934,
+        "p95": 109.72595499999905,
+        "p99": null,
+        "mean": 82.96595043103423
+      },
+      "tpot_ms": {
+        "p50": 15.011625396825409,
+        "p90": 15.22309047619047,
+        "p95": 15.267455555555557,
+        "p99": null,
+        "mean": 14.939737636836336
+      },
+      "itl_ms": {
+        "p50": 14.677499999999455,
+        "p90": 14.72180000000023,
+        "p95": 14.737599999999906,
+        "p99": 14.759999999999884,
+        "mean": 14.939737636836334
+      },
+      "e2e_ms": {
+        "p50": 1023.5169000000006,
+        "p90": 1041.4348500000003,
+        "p95": 1045.1828999999996,
+        "p99": null,
+        "mean": 1024.1694215517232
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 16.0
+      },
+      "run_id": "20261113-202740-sim-a-local-sweep-c16-5a54",
+      "requests": 232,
+      "request_throughput": 12.18143173544295,
+      "input_token_throughput": 3832.2679227360977,
+      "output_token_throughput": 779.6116310683489,
+      "goodput_rps": 12.18143173544295,
+      "slo_attainment": 1.0,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 119.17449999999974,
+        "p90": 143.96980000000005,
+        "p95": 147.70440499999995,
+        "p99": null,
+        "mean": 114.90074525862047
+      },
+      "tpot_ms": {
+        "p50": 18.15909206349215,
+        "p90": 18.901966666666695,
+        "p95": 18.938155555555575,
+        "p99": null,
+        "mean": 18.299755446086486
+      },
+      "itl_ms": {
+        "p50": 17.351700000000747,
+        "p90": 17.42619999999917,
+        "p95": 17.447799999999347,
+        "p99": 62.82879999999835,
+        "mean": 18.299755446086483
+      },
+      "e2e_ms": {
+        "p50": 1265.9402000000011,
+        "p90": 1288.2319000000014,
+        "p95": 1294.776089999998,
+        "p99": null,
+        "mean": 1267.785338362069
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 32.0
+      },
+      "run_id": "20261113-202741-sim-a-local-sweep-c32-7bbc",
+      "requests": 232,
+      "request_throughput": 17.077181122415833,
+      "input_token_throughput": 5372.466459404157,
+      "output_token_throughput": 1092.9395918346133,
+      "goodput_rps": 16.856355504453557,
+      "slo_attainment": 0.9870689655172413,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 140.37719999999976,
+        "p90": 208.61916000000016,
+        "p95": 304.34040000000005,
+        "p99": null,
+        "mean": 149.6552448275864
+      },
+      "tpot_ms": {
+        "p50": 25.50349841269845,
+        "p90": 26.2110126984127,
+        "p95": 26.380790476190466,
+        "p99": null,
+        "mean": 25.13690017104544
+      },
+      "itl_ms": {
+        "p50": 22.695799999999988,
+        "p90": 22.821000000000424,
+        "p95": 62.09350000000002,
+        "p99": 79.47249999999984,
+        "mean": 25.13690017104544
+      },
+      "e2e_ms": {
+        "p50": 1754.0870000000002,
+        "p90": 1819.0382700000002,
+        "p95": 1909.3649,
+        "p99": null,
+        "mean": 1733.2799556034493
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    },
+    {
+      "load": {
+        "kind": "concurrency",
+        "value": 64.0
+      },
+      "run_id": "20261113-202741-sim-a-local-sweep-c64-7068",
+      "requests": 232,
+      "request_throughput": 17.18342827510754,
+      "input_token_throughput": 5405.891722048595,
+      "output_token_throughput": 1099.7394096068826,
+      "goodput_rps": 1.5553965249019757,
+      "slo_attainment": 0.09051724137931035,
+      "error_rate": 0.0,
+      "ttft_ms": {
+        "p50": 1813.9868000000056,
+        "p90": 1898.5548600000038,
+        "p95": 2044.4906999999998,
+        "p99": null,
+        "mean": 1677.8728137931043
+      },
+      "tpot_ms": {
+        "p50": 26.358652380952392,
+        "p90": 26.769794285714326,
+        "p95": 26.79321444444448,
+        "p99": null,
+        "mean": 25.831550355774507
+      },
+      "itl_ms": {
+        "p50": 22.699000000000026,
+        "p90": 22.8306000000007,
+        "p95": 69.21189999999999,
+        "p99": 81.25930000000014,
+        "mean": 25.831550355774507
+      },
+      "e2e_ms": {
+        "p50": 3463.5221000000024,
+        "p90": 3557.1176000000055,
+        "p95": 3705.3507000000004,
+        "p99": null,
+        "mean": 3305.260486206898
+      },
+      "mean_input_tokens": 314.5991379310345,
+      "mean_output_tokens": 64.0,
+      "gpu_memory_peak_gb": null
+    }
+  ],
+  "memory": {},
+  "notes": [
+    "SIMULATED: CPU model, not GPU measurements"
+  ]
+}

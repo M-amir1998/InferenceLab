@@ -1,0 +1,11 @@
+# Local multi-turn chat for simulated prefix-cache / affinity studies.
+name: local_chat
+model: demo-model
+num_requests: 160
+sessions:
+  turns: {kind: fixed, value: 4}
+  system_prompt_tokens: 256
+input_tokens: {kind: uniform, min: 48, max: 96}
+output_tokens: {kind: fixed, value: 48}
+arrival: {kind: closed_loop, concurrency: 8}
+seed: 3

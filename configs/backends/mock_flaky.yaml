@@ -1,0 +1,8 @@
+# Mock with injected failures (1% 5xx, 0.5% hangs) for reliability tests.
+type: mock
+name: mock-flaky
+models: [demo-model]
+latency: {ttft_ms: 40, tpot_ms: 15}
+failure_probability: 0.01
+timeout_probability: 0.005
+seed: 2

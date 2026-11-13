@@ -1,0 +1,13 @@
+# In-process gateway (routing + admission, no HTTP hop) over mock backends, virtual time.
+name: gateway-inprocess
+target:
+  type: gateway
+  gateway:
+    backends:
+      - {type: mock, name: mock-a, models: [demo-model], latency: {ttft_ms: 40, tpot_ms: 10}}
+      - {type: mock, name: mock-b, models: [demo-model], latency: {ttft_ms: 80, tpot_ms: 20}, failure_probability: 0.02}
+    routing: {policy: latency_aware}
+    health: {enabled: false}
+workload: ../workloads/smoke.yaml
+slo: ../slos/local_demo.yaml
+virtual_time: true

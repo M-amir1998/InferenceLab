@@ -1,0 +1,18 @@
+# vLLM v0.33.0 serving the official AWQ checkpoint (auto-detected, Marlin kernels).
+name: vllm-qwen7b-awq
+model: qwen2.5-7b-instruct-awq
+backend: vllm
+image: vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e
+quantization: awq
+dtype: auto        # AWQ checkpoint activations are FP16
+gpu_memory_utilization: 0.90
+served_model_name: qwen2.5-7b-instruct-awq
+port: 8000
+hardware:
+  gpu: H100-80GB-SXM   # the GPU you actually rent; prices are supplied by the experiment config
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: true
+chunked_prefill: true

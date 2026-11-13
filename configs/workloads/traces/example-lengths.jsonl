@@ -1,0 +1,60 @@
+{"timestamp_s": 1.02, "input_tokens": 115, "output_tokens": 395, "conversation_id": "c-0"}
+{"timestamp_s": 1.342, "input_tokens": 521, "output_tokens": 87}
+{"timestamp_s": 2.675, "input_tokens": 1449, "output_tokens": 395}
+{"timestamp_s": 4.903, "input_tokens": 242, "output_tokens": 318, "conversation_id": "c-1"}
+{"timestamp_s": 5.451, "input_tokens": 125, "output_tokens": 63}
+{"timestamp_s": 5.697, "input_tokens": 1098, "output_tokens": 324}
+{"timestamp_s": 5.724, "input_tokens": 471, "output_tokens": 382, "conversation_id": "c-2"}
+{"timestamp_s": 6.774, "input_tokens": 1180, "output_tokens": 230}
+{"timestamp_s": 7.023, "input_tokens": 1270, "output_tokens": 158}
+{"timestamp_s": 8.68, "input_tokens": 77, "output_tokens": 97, "conversation_id": "c-3"}
+{"timestamp_s": 9.878, "input_tokens": 760, "output_tokens": 158}
+{"timestamp_s": 10.047, "input_tokens": 753, "output_tokens": 68}
+{"timestamp_s": 10.145, "input_tokens": 262, "output_tokens": 199, "conversation_id": "c-4"}
+{"timestamp_s": 12.025, "input_tokens": 1300, "output_tokens": 151}
+{"timestamp_s": 13.671, "input_tokens": 1004, "output_tokens": 290}
+{"timestamp_s": 13.804, "input_tokens": 839, "output_tokens": 56, "conversation_id": "c-5"}
+{"timestamp_s": 14.607, "input_tokens": 1351, "output_tokens": 332}
+{"timestamp_s": 16.774, "input_tokens": 804, "output_tokens": 311}
+{"timestamp_s": 16.988, "input_tokens": 206, "output_tokens": 39, "conversation_id": "c-6"}
+{"timestamp_s": 18.07, "input_tokens": 656, "output_tokens": 56}
+{"timestamp_s": 20.003, "input_tokens": 270, "output_tokens": 210}
+{"timestamp_s": 20.329, "input_tokens": 1365, "output_tokens": 202, "conversation_id": "c-7"}
+{"timestamp_s": 20.507, "input_tokens": 791, "output_tokens": 123}
+{"timestamp_s": 21.616, "input_tokens": 1463, "output_tokens": 347}
+{"timestamp_s": 21.69, "input_tokens": 1364, "output_tokens": 103, "conversation_id": "c-8"}
+{"timestamp_s": 22.454, "input_tokens": 565, "output_tokens": 99}
+{"timestamp_s": 23.074, "input_tokens": 616, "output_tokens": 343}
+{"timestamp_s": 24.239, "input_tokens": 513, "output_tokens": 366, "conversation_id": "c-9"}
+{"timestamp_s": 24.631, "input_tokens": 178, "output_tokens": 133}
+{"timestamp_s": 26.356, "input_tokens": 710, "output_tokens": 221}
+{"timestamp_s": 26.668, "input_tokens": 496, "output_tokens": 306, "conversation_id": "c-10"}
+{"timestamp_s": 28.758, "input_tokens": 708, "output_tokens": 124}
+{"timestamp_s": 29.824, "input_tokens": 874, "output_tokens": 345}
+{"timestamp_s": 30.438, "input_tokens": 606, "output_tokens": 87, "conversation_id": "c-11"}
+{"timestamp_s": 30.721, "input_tokens": 1213, "output_tokens": 291}
+{"timestamp_s": 31.026, "input_tokens": 1261, "output_tokens": 235}
+{"timestamp_s": 33.307, "input_tokens": 881, "output_tokens": 201, "conversation_id": "c-12"}
+{"timestamp_s": 33.554, "input_tokens": 347, "output_tokens": 276}
+{"timestamp_s": 34.235, "input_tokens": 160, "output_tokens": 72}
+{"timestamp_s": 34.401, "input_tokens": 391, "output_tokens": 364, "conversation_id": "c-13"}
+{"timestamp_s": 34.949, "input_tokens": 194, "output_tokens": 213}
+{"timestamp_s": 35.43, "input_tokens": 1022, "output_tokens": 286}
+{"timestamp_s": 35.719, "input_tokens": 1197, "output_tokens": 21, "conversation_id": "c-14"}
+{"timestamp_s": 36.86, "input_tokens": 298, "output_tokens": 365}
+{"timestamp_s": 39.021, "input_tokens": 610, "output_tokens": 344}
+{"timestamp_s": 39.436, "input_tokens": 665, "output_tokens": 238, "conversation_id": "c-15"}
+{"timestamp_s": 39.608, "input_tokens": 70, "output_tokens": 385}
+{"timestamp_s": 41.695, "input_tokens": 603, "output_tokens": 272}
+{"timestamp_s": 43.13, "input_tokens": 1103, "output_tokens": 70, "conversation_id": "c-16"}
+{"timestamp_s": 45.174, "input_tokens": 675, "output_tokens": 343}
+{"timestamp_s": 45.883, "input_tokens": 471, "output_tokens": 94}
+{"timestamp_s": 46.351, "input_tokens": 394, "output_tokens": 292, "conversation_id": "c-17"}
+{"timestamp_s": 49.419, "input_tokens": 1150, "output_tokens": 16}
+{"timestamp_s": 50.333, "input_tokens": 1064, "output_tokens": 25}
+{"timestamp_s": 50.452, "input_tokens": 807, "output_tokens": 173, "conversation_id": "c-18"}
+{"timestamp_s": 50.725, "input_tokens": 557, "output_tokens": 306}
+{"timestamp_s": 53.662, "input_tokens": 239, "output_tokens": 390}
+{"timestamp_s": 54.328, "input_tokens": 205, "output_tokens": 288, "conversation_id": "c-19"}
+{"timestamp_s": 55.779, "input_tokens": 326, "output_tokens": 353}
+{"timestamp_s": 56.424, "input_tokens": 1189, "output_tokens": 100}

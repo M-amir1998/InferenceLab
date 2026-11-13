@@ -1,0 +1,18 @@
+# Same as vllm_qwen_7b_bf16 but with automatic prefix caching disabled (cache A/B).
+name: vllm-qwen7b-bf16-nocache
+model: qwen2.5-7b-instruct
+backend: vllm
+image: vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e
+quantization: bf16
+dtype: bfloat16
+gpu_memory_utilization: 0.90
+served_model_name: qwen2.5-7b-instruct
+port: 8000
+hardware:
+  gpu: H100-80GB-SXM   # the GPU you actually rent; prices are supplied by the experiment config
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: false
+chunked_prefill: true

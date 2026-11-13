@@ -1,0 +1,5 @@
+# Any OpenAI-compatible endpoint (e.g. an InferenceLab mock server).
+type: openai
+name: generic
+base_url: http://127.0.0.1:9001
+models: [demo-model]

@@ -1,0 +1,13 @@
+# Remote GPU host TEMPLATE. Copy to configs/hosts/<name>.local.yaml (git-ignored) and edit.
+# Authentication uses your SSH setup (agent / ~/.ssh/config). Never put key material here;
+# identity_file is only a path. Engine secrets (HF_TOKEN) live in env_file ON THE HOST.
+name: example-gpu
+hostname: gpu-host.example.com
+user: ubuntu
+port: 22
+# identity_file: ~/.ssh/id_ed25519
+gpu_profile: H100-80GB-SXM
+workdir: ~/inferencelab
+hf_cache: ~/.cache/huggingface
+env_file: ~/.inferencelab/env
+startup_timeout_s: 1800

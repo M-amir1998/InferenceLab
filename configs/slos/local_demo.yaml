@@ -1,0 +1,5 @@
+# SLO used by local simulated runs.
+name: local_demo
+ttft_p95_ms: 400
+tpot_p95_ms: 50
+e2e_p95_ms: 3000

@@ -1,0 +1,8 @@
+# CI smoke benchmark: in-process simulated engine, virtual time (seconds of wall time).
+name: smoke-simulated
+target:
+  type: backend
+  backend: ../backends/sim_a.yaml
+workload: ../workloads/smoke.yaml
+slo: ../slos/local_demo.yaml
+virtual_time: true

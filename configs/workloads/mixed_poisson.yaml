@@ -1,0 +1,22 @@
+# Production-like mix (weighted buckets) under open-loop Poisson arrivals.
+name: mixed_poisson
+description: 70% short chat, 25% medium, 5% long-context; Poisson arrivals
+model: qwen2.5-7b-instruct
+duration_s: 300
+input_tokens:
+  kind: buckets
+  buckets:
+    - {min: 64, max: 512, weight: 70}
+    - {min: 512, max: 2048, weight: 25}
+    - {min: 2048, max: 6000, weight: 5}
+output_tokens:
+  kind: buckets
+  buckets:
+    - {min: 32, max: 256, weight: 80}
+    - {min: 256, max: 1024, weight: 20}
+arrival: {kind: poisson, rate: 4.0}
+warmup: {seconds: 30}
+cooldown: {seconds: 15}
+temperature: 0.0
+ignore_eos: true
+seed: 17

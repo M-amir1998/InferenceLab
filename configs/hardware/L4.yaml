@@ -1,0 +1,13 @@
+# Specification only. Prices are never stored here: supply them per experiment
+# (hourly_cost_usd + price_source + price_recorded_at) because they change constantly.
+name: L4
+vendor: nvidia
+architecture: Ada Lovelace
+compute_capability: "8.9"
+vram_gb: 24
+memory_type: GDDR6
+memory_bandwidth_gbps: 300
+fp8_tensor_cores: true
+form_factor: "PCIe, single slot, 72 W"
+interconnect: PCIe Gen4 x16
+source: "https://www.nvidia.com/en-us/data-center/l4/"

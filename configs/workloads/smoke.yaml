@@ -1,0 +1,9 @@
+# Tiny local workload for CI smoke tests (mock/simulated backends).
+name: smoke
+model: demo-model
+num_requests: 40
+input_tokens: {kind: uniform, min: 32, max: 128}
+output_tokens: {kind: fixed, value: 16}
+arrival: {kind: closed_loop, concurrency: 4}
+warmup: {requests: 4}
+seed: 1

@@ -1,0 +1,6 @@
+# Interactive chat SLO (distribution-level objectives + availability).
+name: interactive
+ttft_p95_ms: 500
+tpot_p95_ms: 50
+e2e_p95_ms: 10000
+availability: 0.99

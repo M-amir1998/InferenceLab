@@ -1,0 +1,6 @@
+# Tighter chat SLO with an explicit per-request threshold for goodput.
+name: strict_chat
+ttft_p50_ms: 150
+ttft_p99_ms: 800
+tpot_p95_ms: 30
+request_thresholds: {ttft_ms: 800, tpot_ms: 40}

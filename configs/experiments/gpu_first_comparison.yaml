@@ -1,0 +1,32 @@
+# FIRST GPU EXPERIMENT (remote): vLLM vs SGLang on the same model revision and GPU.
+# Same checkpoint/revision, same BF16 precision, same context (8k), same max concurrency,
+# prefix caching and chunked prefill enabled on both, same workloads, warmup and window.
+# 2 deployments x 4 workloads x 4 concurrency levels = 32 runs (cap 40).
+# Dry run:  inferencelab remote plan configs/experiments/gpu_first_comparison.yaml --host configs/hosts/my-gpu.local.yaml
+name: gpu-first-comparison
+description: vLLM 0.33.0 vs SGLang 0.5.23, Qwen2.5-7B-Instruct BF16, 1 GPU
+mode: remote
+max_runs: 40
+matrix:
+  deployments:
+    - ../deployments/vllm_qwen_7b_bf16.yaml
+    - ../deployments/sglang_qwen_7b_bf16.yaml
+  workloads:
+    - ../workloads/short_short.yaml
+    - ../workloads/long_short.yaml
+    - ../workloads/short_long.yaml
+    - ../workloads/shared_prefix.yaml
+  concurrency: [1, 8, 32, 128]   # 128 approaches saturation for a 7B model on one GPU
+slo: ../slos/interactive.yaml
+models_dir: ../models
+max_run_duration_s: 900
+model_load_estimate_s: 600
+# Pricing: InferenceLab never ships cloud prices. Before a paid run, set the price you
+# were quoted and where/when you saw it, e.g.:
+# pricing:
+#   gpu: H100-80GB-SXM
+#   count: 1
+#   hourly_cost_usd: <price>
+#   price_unit: per_instance_hour
+#   price_source: <provider console / invoice URL>
+#   price_recorded_at: <YYYY-MM-DD>

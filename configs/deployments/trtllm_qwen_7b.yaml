@@ -1,0 +1,18 @@
+# TensorRT-LLM 1.2.1 (trtllm-serve, PyTorch backend) serving Qwen2.5-7B-Instruct in BF16.
+# The pinned HF snapshot is downloaded first; trtllm-serve has no revision flag.
+# AWQ is intentionally absent: the PyTorch backend does not load HF AutoAWQ checkpoints.
+name: trtllm-qwen7b-bf16
+model: qwen2.5-7b-instruct
+backend: tensorrt_llm
+image: nvcr.io/nvidia/tensorrt-llm/release:1.2.1
+quantization: bf16
+gpu_memory_utilization: 0.85   # kv_cache_free_gpu_memory_fraction
+port: 8000
+hardware:
+  gpu: H100-80GB-SXM   # the GPU you actually rent; prices are supplied by the experiment config
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: true
+chunked_prefill: true

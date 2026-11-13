@@ -1,0 +1,6 @@
+# Load the local gateway (configs/gateway/local.yaml) over HTTP.
+name: local-gateway-http
+target: {type: http, base_url: "http://127.0.0.1:8080"}
+workload: ../workloads/local_chat.yaml
+slo: ../slos/local_demo.yaml
+simulated: true

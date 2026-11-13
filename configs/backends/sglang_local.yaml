@@ -1,0 +1,6 @@
+# HTTP adapter for an SGLang server (launched with --enable-metrics).
+type: sglang
+name: sglang
+base_url: http://127.0.0.1:30000
+models: [qwen2.5-7b-instruct]
+metrics_path: /metrics

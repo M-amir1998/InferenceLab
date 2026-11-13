@@ -1,0 +1,13 @@
+# Specification only. Prices are never stored here: supply them per experiment
+# (hourly_cost_usd + price_source + price_recorded_at) because they change constantly.
+name: A100-80GB-SXM
+vendor: nvidia
+architecture: Ampere
+compute_capability: "8.0"
+vram_gb: 80
+memory_type: HBM2e
+memory_bandwidth_gbps: 2039
+fp8_tensor_cores: false
+form_factor: SXM4
+interconnect: NVLink 600 GB/s
+source: "https://www.nvidia.com/en-us/data-center/a100/"

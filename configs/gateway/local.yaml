@@ -1,0 +1,15 @@
+# Gateway in front of two local simulated engines started with:
+#   inferencelab backend serve configs/backends/sim_a.yaml --port 9001
+#   inferencelab backend serve configs/backends/sim_b.yaml --port 9002
+server: {host: 127.0.0.1, port: 8080}
+backends:
+  - {type: openai, name: sim-a, base_url: "http://127.0.0.1:9001", models: [demo-model], deployment: sim-a}
+  - {type: openai, name: sim-b, base_url: "http://127.0.0.1:9002", models: [demo-model], deployment: sim-b}
+routing:
+  policy: latency_aware
+  affinity: {enabled: true, keys: [prefix_key, conversation_id], load_factor: 1.25}
+queue: {max_concurrency: 64, max_pending_requests: 256, shedding: reject_newest, max_queue_wait_s: 10}
+circuit_breaker: {failure_threshold: 5, open_duration_s: 10}
+retry: {max_attempts: 3}
+timeouts: {first_token_s: 30, idle_s: 15, overall_s: 300}
+slo: ../slos/local_demo.yaml

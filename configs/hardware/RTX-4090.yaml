@@ -1,0 +1,14 @@
+# Specification only. Prices are never stored here: supply them per experiment
+# (hourly_cost_usd + price_source + price_recorded_at) because they change constantly.
+name: RTX-4090
+vendor: nvidia
+architecture: Ada Lovelace
+compute_capability: "8.9"
+vram_gb: 24
+memory_type: GDDR6X
+memory_bandwidth_gbps: 1008
+fp8_tensor_cores: true
+form_factor: Consumer PCIe card
+interconnect: PCIe Gen4
+source: "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/"
+notes: Consumer card; engine support for FP8 kernels on Ada varies by version.

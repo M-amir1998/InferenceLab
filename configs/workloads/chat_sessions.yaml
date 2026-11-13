@@ -1,0 +1,16 @@
+# Multi-turn chat: each turn resends the conversation (history reuse / session affinity).
+name: chat_sessions
+description: 4-8 turn conversations, 64-192 new tokens per turn, 128-256 output tokens
+model: qwen2.5-7b-instruct
+num_requests: 512
+sessions:
+  turns: {kind: uniform, min: 4, max: 8}
+  think_time_s: 0.5
+  system_prompt_tokens: 512
+input_tokens: {kind: uniform, min: 64, max: 192}
+output_tokens: {kind: uniform, min: 128, max: 256}
+arrival: {kind: poisson, rate: 2.0}   # new conversations per second
+warmup: {seconds: 10}
+temperature: 0.0
+ignore_eos: true
+seed: 16

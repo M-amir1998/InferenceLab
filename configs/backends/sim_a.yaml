@@ -1,0 +1,13 @@
+# Simulated continuous-batching engine (fast profile).
+type: simulated
+name: sim-a
+models: [demo-model]
+engine:
+  step_overhead_s: 0.012
+  prefill_s_per_token: 0.00003
+  decode_s_per_seq: 0.0003
+  max_num_seqs: 32
+  max_num_batched_tokens: 2048
+  num_kv_blocks: 4096
+  prefix_caching: true
+  chunked_prefill: true

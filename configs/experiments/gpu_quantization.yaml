@@ -1,0 +1,25 @@
+# BF16 vs AWQ for vLLM and SGLang (remote). Pair with quality validation:
+#   inferencelab quality compare --reference <bf16 backend.yaml> --candidate <awq backend.yaml>
+name: gpu-quantization
+mode: remote
+max_runs: 16
+matrix:
+  deployments:
+    - ../deployments/vllm_qwen_7b_bf16.yaml
+    - ../deployments/vllm_qwen_7b_awq.yaml
+    - ../deployments/sglang_qwen_7b_bf16.yaml
+    - ../deployments/sglang_qwen_7b_awq.yaml
+  workloads: [../workloads/short_short.yaml, ../workloads/long_short.yaml]
+  concurrency: [8, 32]
+slo: ../slos/interactive.yaml
+models_dir: ../models
+max_run_duration_s: 900
+# Pricing: InferenceLab never ships cloud prices. Before a paid run, set the price you
+# were quoted and where/when you saw it, e.g.:
+# pricing:
+#   gpu: H100-80GB-SXM
+#   count: 1
+#   hourly_cost_usd: <price>
+#   price_unit: per_instance_hour
+#   price_source: <provider console / invoice URL>
+#   price_recorded_at: <YYYY-MM-DD>

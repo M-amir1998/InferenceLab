@@ -1,0 +1,16 @@
+# Official 4-bit AWQ (W4A16, group size 128) export of Qwen2.5-7B-Instruct.
+# vLLM and SGLang auto-detect it; TensorRT-LLM's PyTorch backend does NOT load AutoAWQ
+# checkpoints (it needs NVIDIA ModelOpt exports), so no TRT-LLM AWQ deployment exists.
+name: qwen2.5-7b-instruct-awq
+family: qwen2.5
+checkpoint: Qwen/Qwen2.5-7B-Instruct-AWQ
+revision: b25037543e9394b818fdfca67ab2a00ecc7dd641
+tokenizer: Qwen/Qwen2.5-7B-Instruct
+architecture: Qwen2ForCausalLM
+parameter_count_b: 7.62
+context_length: 32768
+quantization: awq
+quantization_tool: autoawq
+license:
+  id: Apache-2.0
+  url: https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-AWQ

@@ -1,0 +1,23 @@
+# Speculative decoding with n-gram prompt lookup (no draft model needed).
+# Gains depend on how often outputs repeat prompt text; measure TPOT and the engine's
+# acceptance rate (vllm:spec_decode_* counters) rather than assuming a speed-up.
+name: vllm-qwen7b-bf16-ngram
+model: qwen2.5-7b-instruct
+backend: vllm
+image: vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e
+quantization: bf16
+dtype: bfloat16
+gpu_memory_utilization: 0.90
+served_model_name: qwen2.5-7b-instruct
+port: 8000
+hardware:
+  gpu: H100-80GB-SXM
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: true
+chunked_prefill: true
+speculative:
+  method: ngram
+  num_speculative_tokens: 4

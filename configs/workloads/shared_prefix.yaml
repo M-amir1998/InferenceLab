@@ -1,0 +1,14 @@
+# Prefix-caching workload: a few long shared system/context prefixes + short queries.
+# Compare deployments with prefix caching on vs off (configs/experiments/*prefix*).
+name: shared_prefix
+description: 4 shared 2048-token prefixes, 32-128 token queries, 64-128 output tokens
+model: qwen2.5-7b-instruct
+num_requests: 512
+input_tokens: {kind: uniform, min: 2080, max: 2176}   # prefix (2048) + query
+output_tokens: {kind: uniform, min: 64, max: 128}
+shared_prefix: {num_prefixes: 4, prefix_tokens: 2048, popularity: zipf, zipf_s: 1.1}
+arrival: {kind: closed_loop, concurrency: 16}
+warmup: {requests: 16}
+temperature: 0.0
+ignore_eos: true
+seed: 15

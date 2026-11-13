@@ -1,0 +1,12 @@
+# Short input / short output: chat-like interactive traffic.
+name: short_short
+description: 128-256 input tokens, 64-128 output tokens
+model: qwen2.5-7b-instruct
+num_requests: 512
+input_tokens: {kind: uniform, min: 128, max: 256}
+output_tokens: {kind: uniform, min: 64, max: 128}
+arrival: {kind: closed_loop, concurrency: 8}   # overridden by experiment matrices
+warmup: {requests: 16}
+temperature: 0.0
+ignore_eos: true
+seed: 11

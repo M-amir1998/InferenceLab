@@ -1,0 +1,14 @@
+# Load generator used by docker-compose (service "loadgen").
+name: compose-load
+target: {type: http, base_url: "http://gateway:8080"}
+workload:
+  name: compose-chat
+  model: demo-model
+  duration_s: 600
+  sessions: {turns: {kind: uniform, min: 2, max: 6}, think_time_s: 1.0, system_prompt_tokens: 128}
+  input_tokens: {kind: uniform, min: 32, max: 128}
+  output_tokens: {kind: uniform, min: 16, max: 64}
+  arrival: {kind: poisson, rate: 3.0}
+slo: ../slos/local_demo.yaml
+simulated: true
+output_dir: /tmp/inferencelab-results

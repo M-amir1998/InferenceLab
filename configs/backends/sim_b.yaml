@@ -1,0 +1,10 @@
+# Simulated engine (slower profile: 2x step costs).
+type: simulated
+name: sim-b
+models: [demo-model]
+engine:
+  step_overhead_s: 0.026
+  prefill_s_per_token: 0.00006
+  decode_s_per_seq: 0.0006
+  max_num_seqs: 32
+  prefix_caching: true

@@ -1,0 +1,38 @@
+# Production-shaped example: two GPU engines (preferred) + a fallback tier, auth,
+# tenant quotas and an SSRF allowlist. Hostnames are placeholders.
+server: {host: 0.0.0.0, port: 8080}
+backends:
+  - type: vllm
+    name: vllm-a
+    base_url: http://vllm-a.internal:8000
+    models: [qwen2.5-7b-instruct]
+    deployment: vllm-qwen7b-bf16
+    routing: {tier: 0, max_outstanding: 128}
+  - type: sglang
+    name: sglang-a
+    base_url: http://sglang-a.internal:30000
+    models: [qwen2.5-7b-instruct]
+    deployment: sglang-qwen7b-bf16
+    routing: {tier: 0, max_outstanding: 128}
+  - type: vllm
+    name: vllm-awq-fallback
+    base_url: http://vllm-awq.internal:8000
+    models: [qwen2.5-7b-instruct]
+    model_map: {qwen2.5-7b-instruct: qwen2.5-7b-instruct-awq}
+    deployment: vllm-qwen7b-awq
+    routing: {tier: 1}
+routing:
+  policy: slo_aware
+  affinity: {enabled: true, keys: [prefix_key, conversation_id]}
+queue: {max_concurrency: 256, max_pending_requests: 1000, shedding: slo_aware, slo_queue_budget_s: 2.0}
+tenants:
+  default: {requests_per_second: 5, burst: 10, max_concurrent: 16, tokens_per_minute: 200000}
+  tenants:
+    internal-batch: {requests_per_second: 50, max_concurrent: 128}
+auth: {enabled: true, api_keys_env: INFERENCELAB_API_KEYS}
+security:
+  allowed_backend_hosts: [vllm-a.internal, sglang-a.internal, vllm-awq.internal]
+limits: {max_request_bytes: 1048576, max_messages: 128, max_tokens_cap: 4096}
+slo: {name: interactive, ttft_p95_ms: 500, tpot_p95_ms: 50}
+observability:
+  tracing: {enabled: false, exporter: otlp}

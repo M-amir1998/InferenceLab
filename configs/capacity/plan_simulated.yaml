@@ -1,0 +1,14 @@
+# Capacity plan from a SIMULATED profile (illustrates the method; not a GPU estimate).
+profile: ../profiles/sim_a--local_sweep.json
+target:
+  request_rate: 60          # peak req/s to serve
+slo: ../slos/local_demo.yaml
+headroom: 0.2
+redundancy: 1              # N+1
+interpolate: false
+hardware:
+  gpu: cpu-simulated
+  count: 1
+  hourly_cost_usd: 1.0     # EXAMPLE placeholder price, not a quote
+  price_source: example-placeholder
+  price_recorded_at: 2026-11-13

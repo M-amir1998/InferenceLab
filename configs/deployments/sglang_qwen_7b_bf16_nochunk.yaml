@@ -1,0 +1,18 @@
+# SGLang with chunked prefill disabled (--chunked-prefill-size -1) for the long-context study.
+name: sglang-qwen7b-bf16-nochunk
+model: qwen2.5-7b-instruct
+backend: sglang
+image: lmsysorg/sglang:v0.5.23@sha256:f832b5c39559c9caa900b22ad37c76fcce66470676855c42052102c537812f1f
+quantization: bf16
+dtype: bfloat16
+gpu_memory_utilization: 0.85
+served_model_name: qwen2.5-7b-instruct
+port: 30000
+hardware:
+  gpu: H100-80GB-SXM   # the GPU you actually rent; prices are supplied by the experiment config
+  count: 1
+max_context: 8192
+max_concurrency: 256
+max_batched_tokens: 8192
+prefix_caching: true
+chunked_prefill: false

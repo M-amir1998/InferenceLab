@@ -1,0 +1,12 @@
+# Long input / long output: document drafting (stresses KV-cache capacity).
+name: long_long
+description: 3000-4000 input tokens, 768-1024 output tokens
+model: qwen2.5-7b-instruct
+num_requests: 128
+input_tokens: {kind: uniform, min: 3000, max: 4000}
+output_tokens: {kind: uniform, min: 768, max: 1024}
+arrival: {kind: closed_loop, concurrency: 8}
+warmup: {requests: 4}
+temperature: 0.0
+ignore_eos: true
+seed: 14

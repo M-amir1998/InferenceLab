@@ -1,0 +1,12 @@
+# LOCAL (CPU) load sweep over two simulated engines, in virtual time (fast, deterministic).
+# Produces performance profiles used by the capacity and autoscaling examples.
+name: local-capacity-sweep
+description: Simulated engines across closed-loop concurrency levels (SIMULATED results)
+mode: local
+max_runs: 20
+virtual_time: true
+matrix:
+  backends: [../backends/sim_a.yaml, ../backends/sim_b.yaml]
+  workloads: [../workloads/local_sweep.yaml]
+  concurrency: [1, 2, 4, 8, 16, 32, 64]
+slo: ../slos/local_demo.yaml

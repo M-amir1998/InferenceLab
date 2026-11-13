@@ -1,0 +1,23 @@
+# Prefix caching on vs off for both engines (remote).
+name: gpu-prefix-cache
+mode: remote
+max_runs: 8
+matrix:
+  deployments:
+    - ../deployments/vllm_qwen_7b_bf16.yaml
+    - ../deployments/vllm_qwen_7b_bf16_nocache.yaml
+    - ../deployments/sglang_qwen_7b_bf16.yaml
+    - ../deployments/sglang_qwen_7b_bf16_nocache.yaml
+  workloads: [../workloads/shared_prefix.yaml, ../workloads/chat_sessions.yaml]
+slo: ../slos/interactive.yaml
+models_dir: ../models
+max_run_duration_s: 900
+# Pricing: InferenceLab never ships cloud prices. Before a paid run, set the price you
+# were quoted and where/when you saw it, e.g.:
+# pricing:
+#   gpu: H100-80GB-SXM
+#   count: 1
+#   hourly_cost_usd: <price>
+#   price_unit: per_instance_hour
+#   price_source: <provider console / invoice URL>
+#   price_recorded_at: <YYYY-MM-DD>

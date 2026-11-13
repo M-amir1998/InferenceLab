@@ -1,0 +1,5 @@
+# Logical name served by the local mock/simulated backends (no weights involved).
+name: demo-model
+checkpoint: inferencelab/simulated
+revision: main
+notes: CPU-only simulated engine; used by the demo, tests and local experiments.
