@@ -20,7 +20,7 @@ built to be safe by default. Please report vulnerabilities privately through Git
 | **Multi-tenant concerns** | Quotas are isolated per tenant; metrics never use tenant ids as labels; no response caching across tenants. Engine-level prefix caches are shared by design of the engines — tenants sharing an engine can in principle infer cache hits from timing; isolate sensitive tenants on dedicated deployments (vLLM supports `cache_salt`). |
 | **Remote execution** | SSH with `BatchMode` (no interactive prompts) and `StrictHostKeyChecking=accept-new`; hostnames/users validated; `ProxyCommand`/`LocalCommand` options rejected; every remote command is `shlex`-quoted; only a key *path* is configured; secrets live in an env file on the host; machines are never created or deleted. |
 | **Supply chain** | `uv.lock` pinned and checked in CI (`uv lock --check`); engine images pinned by tag + digest; Docker image runs as non-root (uid 10001), read-only in Compose with `no-new-privileges`. |
-| **Secrets in git** | `.gitignore` covers `.env`, keys, weights, caches and results; `detect-secrets` (baseline) and optional `gitleaks` run in CI and pre-commit; `.env.example` holds placeholders only. |
+| **Secrets in git** | `.gitignore` covers `.env`, keys, weights, caches and results; `detect-secrets` (audited baseline) runs in CI and pre-commit; `gitleaks` scans the full history in CI when installed (`.gitleaks.toml` allowlists only the baseline's hashes); `.env.example` holds placeholders only. |
 
 ## Out of scope (v0.1)
 

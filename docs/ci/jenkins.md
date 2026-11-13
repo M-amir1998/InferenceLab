@@ -12,11 +12,19 @@ credentials and no model downloads**.
 | `git`, `curl`, `bash` | standard |
 | `uv` | installed automatically into `~/.local/bin` on first run if missing; Python 3.12 is fetched by uv |
 | Docker (optional) | for the image build stage; the stage is skipped with a message when no daemon is available |
-| `gitleaks` (optional) | history secret scan; `detect-secrets` always runs |
+| `gitleaks` (optional) | history secret scan with the repository's `.gitleaks.toml`; `detect-secrets` always runs |
 | Plugins | Pipeline, Git, JUnit, Timestamper, Workspace Cleanup; *Coverage* plugin optional (coverage XML is archived either way) |
 
 The agent user must be able to talk to Docker (member of the `docker` group, or rootless
 Docker) if the image stage should run. Do not give the agent cloud or GPU credentials.
+
+Without a local `gitleaks` binary, the history scan can run from the official image:
+
+```bash
+docker run --rm -v "$PWD:/repo:ro" -e GIT_CONFIG_COUNT=1 \
+  -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0='*' \
+  ghcr.io/gitleaks/gitleaks:v8.28.0 git --no-banner --redact /repo
+```
 
 ## Job setup
 

@@ -1,0 +1,10 @@
+# gitleaks configuration, picked up by scripts/ci/secret_scan.sh when gitleaks is installed.
+# Default rules plus one audited exception.
+title = "InferenceLab"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "detect-secrets baseline: SHA-1 hashes of audited false positives, not secrets"
+paths = ['''^\.secrets\.baseline$''']
