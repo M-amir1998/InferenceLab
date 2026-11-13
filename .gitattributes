@@ -1,0 +1,7 @@
+# Normalise line endings in the repository; shell scripts must stay LF for remote Linux GPU hosts.
+* text=auto eol=lf
+*.sh text eol=lf
+Jenkinsfile text eol=lf
+*.png binary
+*.jpg binary
+*.parquet binary

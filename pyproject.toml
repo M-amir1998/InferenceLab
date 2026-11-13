@@ -1,0 +1,199 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "inferencelab"
+version = "0.1.0.dev0"
+description = "Reproducible LLM inference engineering platform: serving-engine benchmarking, routing, SLOs, observability and cost/capacity planning."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "M-amir1998" }]
+keywords = ["llm", "inference", "serving", "benchmarking", "vllm", "sglang", "tensorrt-llm", "routing", "slo"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Framework :: AsyncIO",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Benchmark",
+    "Topic :: System :: Distributed Computing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "httpx>=0.28",
+    "pydantic>=2.10",
+    "pyyaml>=6.0.2",
+    "typer>=0.15",
+    "rich>=13.9",
+    "prometheus-client>=0.21",
+    "opentelemetry-api>=1.29",
+    "numpy>=2.1",
+    "pyarrow>=18",
+    "psutil>=6.1",
+]
+
+[project.optional-dependencies]
+# Plot generation for benchmark reports (not needed by the gateway image).
+plots = ["matplotlib>=3.9"]
+# OpenTelemetry SDK + OTLP exporter. Without it, tracing calls are no-ops.
+tracing = [
+    "opentelemetry-sdk>=1.29",
+    "opentelemetry-exporter-otlp-proto-http>=1.29",
+]
+
+[project.scripts]
+inferencelab = "inferencelab.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/M-amir1998/InferenceLab"
+Documentation = "https://github.com/M-amir1998/InferenceLab/tree/main/docs"
+Issues = "https://github.com/M-amir1998/InferenceLab/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.25",
+    "pytest-cov>=6.0",
+    "hypothesis>=6.120",
+    "ruff>=0.9",
+    "mypy>=1.14",
+    "types-PyYAML>=6.0",
+    "types-psutil>=6.1",
+    "pyarrow-stubs>=17",
+    "pre-commit>=4.0",
+    "detect-secrets>=1.5",
+    "bandit>=1.8",
+    "matplotlib>=3.9",
+    "opentelemetry-sdk>=1.29",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/inferencelab"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/inferencelab", "README.md", "LICENSE", "CHANGELOG.md", "pyproject.toml"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+extend-exclude = ["results", "reports", "build"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "B",        # bugbear
+    "UP",       # pyupgrade
+    "N",        # pep8-naming
+    "S",        # bandit (security)
+    "C4",       # comprehensions
+    "SIM",      # simplify
+    "RUF",      # ruff-specific
+    "ASYNC",    # async pitfalls (blocking calls in coroutines)
+    "PT",       # pytest style
+    "PERF",     # performance anti-patterns
+    "PIE",
+    "RET",
+    "TC",       # type-checking-only imports
+    "DTZ",      # naive datetimes
+    "LOG",
+    "G",        # logging format
+]
+ignore = [
+    "S311",    # random is used for seeded simulation/workloads, never for security
+    "RET504",  # unnecessary assignment before return reads better in places
+    "TC001",   # TYPE_CHECKING-only imports: risky with pydantic runtime annotations,
+    "TC002",   # negligible benefit for a service that imports everything at startup
+    "TC003",
+    "TC006",   # quoting cast() types adds noise
+]
+# Mathematical symbols used deliberately in docstrings (formulas, not typos).
+allowed-confusables = ["−", "×", "≈", "–", "‑"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106", "S108", "PERF", "PT011", "PT018", "N802", "E501"]
+"src/inferencelab/cli/**" = ["B008", "E501"]  # typer call defaults; rich-markup strings
+"src/inferencelab/{reporting/**,demo.py}" = ["E501"]  # markdown templates: long prose lines read better unwrapped
+
+[tool.ruff.lint.isort]
+known-first-party = ["inferencelab"]
+
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+
+[tool.ruff.format]
+quote-style = "double"
+line-ending = "lf"
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool", "possibly-undefined"]
+plugins = ["pydantic.mypy"]
+files = ["src/inferencelab", "tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+# Stateful objects are asserted repeatedly (e.g. a breaker's state before/after events);
+# mypy's literal narrowing of properties would flag those as unreachable.
+warn_unreachable = false
+disable_error_code = ["comparison-overlap"]
+
+[[tool.mypy.overrides]]
+module = ["matplotlib", "matplotlib.*"]
+ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+markers = [
+    "integration: in-process multi-component tests (no network beyond loopback)",
+    "e2e: full CPU-only end-to-end tests over real loopback HTTP",
+    "slow: tests that take more than a few seconds",
+]
+filterwarnings = ["error::pytest.PytestUnraisableExceptionWarning"]
+
+[tool.coverage.run]
+source = ["inferencelab"]
+branch = true
+parallel = false
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "@overload",
+    "\\.\\.\\.",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B311"]  # seeded PRNG for simulation, not cryptography

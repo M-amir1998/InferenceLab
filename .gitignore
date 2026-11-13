@@ -1,0 +1,71 @@
+# ----------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.python-cache/
+.uv-cache/
+
+# ----------------------------------------------------------- tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+junit*.xml
+
+# ----------------------------------------------------------- secrets (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+*.kubeconfig
+secrets/
+configs/**/*.local.yaml
+configs/**/*.secret.yaml
+
+# ----------------------------------------------------------- models & caches (never commit)
+*.safetensors
+*.bin
+*.gguf
+*.pt
+*.pth
+*.onnx
+*.engine
+*.plan
+hf_cache/
+.cache/
+/models/
+/checkpoints/
+/engines/
+
+# ----------------------------------------------------------- benchmark & profiling output
+# Run directories are regenerated; only curated reports are committed.
+results/*
+!results/README.md
+*.prof
+*.nsys-rep
+*.qdrep
+*.pftrace
+perf.data*
+traces/*.jsonl
+!configs/workloads/traces/example-lengths.jsonl
+
+# ----------------------------------------------------------- OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
